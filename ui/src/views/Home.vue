@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home fill-height">
     <Map/>
   </div>
 </template>

@@ -1,8 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import routes from './routes'
+import routerOptions from './routes'
 
 Vue.use(VueRouter)
+
+const routes = routerOptions.map(route => {
+  return {
+    ...route,
+    component: () => import(`@/views/${route.component}.vue`)
+  };
+});
 
 const router = new VueRouter({
   mode: 'history',
@@ -12,8 +19,13 @@ const router = new VueRouter({
 
 // eslint-disable-next-line no-unused-vars
 router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   document.title = `Smart Dustbin - ${to.name}`
-  next()
+
+  // Check is requires auth and unauthorized
+  if (requiresAuth && (!token || token === 'null')) next('/login')
+  else next()
 })
 
 export default router

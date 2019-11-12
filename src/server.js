@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const history = require('connect-history-api-fallback')
 const initializeDatabases = require('./dbs')
 const routes = require('./routes')
+const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -15,6 +16,7 @@ const port = process.env.PORT || 8000
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(history())
+app.use(cors())
 app.use(express.static(__dirname + '/../ui/dist'))
 
 

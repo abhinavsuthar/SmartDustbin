@@ -13,10 +13,10 @@ const login = (req, res, dbs) => {
             let token = jwt.sign({username: username}, config.secret, {expiresIn: '24h'})
             res.json({success: true, message: 'Authentication successful!', token: token})
           } else {
-            res.status(403).json({success: false, message: 'Incorrect username or password'})
+            res.status(401).json({success: false, message: 'Incorrect username or password'})
           }
         } else {
-          res.status(400).json({success: false, message: 'Authentication failed! Please check the request'})
+          res.status(401).json({success: false, message: 'Authentication failed! Please check the request'})
         }
       })
       .catch(error => {

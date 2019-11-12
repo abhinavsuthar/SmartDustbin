@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login fill-height">
     <LoginForm/>
   </div>
 </template>
