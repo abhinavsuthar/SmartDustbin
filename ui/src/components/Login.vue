@@ -61,6 +61,8 @@
 </template>
 
 <script>
+  import config from '../../config/config'
+
   export default {
     name: 'Login',
     props: {
@@ -83,7 +85,7 @@
       login() {
         const self = this
         this.alert = null
-        this.$http.post('http://localhost:8000/auth/login', {username: this.username, password: this.password}).then(response => {
+        this.$http.post(`${config.BASE_URL}/auth/login`, {username: this.username, password: this.password}).then(response => {
           const body = response.body
           if (body.success) {
             console.log(body.message)

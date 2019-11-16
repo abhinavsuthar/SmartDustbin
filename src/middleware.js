@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
       if (err) {
         return res.status(401).json({success: false, message: 'Token is not valid'})
       } else {
-        req.decoded = decoded
+        req.user = decoded
         next()
       }
     })

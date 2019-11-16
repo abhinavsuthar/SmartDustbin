@@ -10,7 +10,7 @@ const login = (req, res, dbs) => {
       .then(document => {
         if (username && password) {
           if (document && username === document.username && password === document.password) {
-            let token = jwt.sign({username: username}, config.secret, {expiresIn: '24h'})
+            let token = jwt.sign({username: username, role: document.role, locations: document.locations}, config.secret, {expiresIn: '24h'})
             res.json({success: true, message: 'Authentication successful!', token: token})
           } else {
             res.status(401).json({success: false, message: 'Incorrect username or password'})

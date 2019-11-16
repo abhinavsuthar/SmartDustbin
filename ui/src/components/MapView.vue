@@ -33,8 +33,8 @@
               style="cursor: pointer"
               v-for="(m, index) in markers">
             <div>
-              <v-alert :type="getMarkerType(m.current_status.filled)" dense>
-                Dustbin is <strong>{{ m.current_status.filled }}</strong>% filled
+              <v-alert :type="getMarkerType(m.status.level)" dense>
+                Dustbin is <strong>{{ m.status.level }}</strong>% filled
               </v-alert>
             </div>
           </gmap-custom-marker>
@@ -67,10 +67,10 @@
         console.log('clicked')
         // this.$refs.mapRef.center = this.markers[0]
       },
-      getMarkerType(filled) {
-        if (filled > 75) return 'error'
-        else if (filled > 50) return 'warning'
-        else if (filled > 25) return 'info'
+      getMarkerType(level) {
+        if (level > 75) return 'error'
+        else if (level > 50) return 'warning'
+        else if (level > 25) return 'info'
         else return 'success'
       }
     },
@@ -83,7 +83,7 @@
         const dustbins = this.dustbins ? this.dustbins.data : null
         if (!dustbins) return dustbins
         return dustbins.filter(dustbin => {
-          return dustbin.current_status.filled >= this.markerFilterFilled && dustbin.location_name.toLowerCase().includes(this.markerFilterCity.toLowerCase());
+          return dustbin.status.level >= this.markerFilterFilled && dustbin.pincode.toLowerCase().includes(this.markerFilterCity.toLowerCase());
         })
       },
       markers() {
