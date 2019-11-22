@@ -3,7 +3,7 @@
     <v-layout wrap pt-2>
       <v-flex xs12 sm8 class="pink-box fill-height">
         <GmapMap :center="markers[0] ? markers[0].location : {lat: 0, lng:0}" :zoom="7" class="gmap fill-height" ref="mapRef">
-          <v-hover v-slot:default="{ hover }">
+
           <gmap-custom-marker
                   :key="index"
                   :marker="m.location"
@@ -12,13 +12,14 @@
                   style="cursor: pointer"
                   v-for="(m, index) in markers">
             <div>
+              <v-hover v-slot:default="{ hover }">
               <v-alert v-if="hover" :type="getMarkerType(m.status.level)" dense>
                 Dustbin is <strong>{{ m.status.level }}</strong>% filled
               </v-alert>
               <v-icon v-else :class="getMarkerIcon(m.status.level)" medium :color="getMarkerType(m.status.level)"></v-icon>
+              </v-hover>
             </div>
           </gmap-custom-marker>
-          </v-hover>
         </GmapMap>
       </v-flex>
       <v-flex sm4>
