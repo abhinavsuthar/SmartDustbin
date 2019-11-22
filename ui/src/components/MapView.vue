@@ -2,7 +2,7 @@
   <v-container grid-list-md fill-height fluid>
     <v-layout wrap pt-2>
       <v-flex xs12 sm8 class="pink-box fill-height">
-        <GmapMap :center="markers[0] ? markers[0].location : {lat: 0, lng:0}" :zoom="7" class="gmap fill-height" ref="mapRef">
+        <GmapMap :center="markers[0] ? markers[0].location : {lat: 0, lng:0}" :zoom="12" class="gmap fill-height" ref="mapRef">
 
           <gmap-custom-marker
                   :key="index"
